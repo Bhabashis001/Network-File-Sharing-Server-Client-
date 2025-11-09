@@ -91,19 +91,6 @@ g++ -std=c++17 -O2 -Wall client.cpp -o client
 
 ---
 
-## 📚 Protocol Cheat Sheet
-
-All control messages use a simple framed protocol:
-- **send_line / recv_line**: `uint32_t length (network byte order)` + raw bytes (no trailing newline).  
-- File transfer uses a **uint64_t size** (big-endian), followed by XOR-encrypted binary chunks.
-
-Commands after authentication:
-- `LIST` → returns `OK` + newline-separated file names
-- `GET <filename>` → returns `OK` + file bytes (XOR)
-- `PUT <filename>` → returns `OK` then expects incoming file bytes (XOR)
-- `QUIT` → returns `BYE` and closes
-
----
 
 ## 🧩 Troubleshooting
 

@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: file_server
+    ports:
+      - "8080:8080"
+    networks:
+      - fileshare-net
+    stdin_open: true
+    tty: true
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    container_name: file_client
+    networks:
+      - fileshare-net
+    stdin_open: true
+    tty: true
+
+networks:
+  fileshare-net:
+    driver: bridge

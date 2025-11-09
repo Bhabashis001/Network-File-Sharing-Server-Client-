@@ -1,0 +1,15 @@
+# Dockerfile.server
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y g++ make netcat iputils-ping && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY server.cpp users.txt ./
+COPY server_files ./server_files
+
+RUN g++ -std=c++17 -O2 -Wall server.cpp -o server
+
+EXPOSE 8080
+
+CMD ["./server"]

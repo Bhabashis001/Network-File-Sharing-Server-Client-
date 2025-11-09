@@ -1,0 +1,12 @@
+# Dockerfile.client
+FROM ubuntu:22.04
+
+RUN apt-get update && apt-get install -y g++ make netcat iputils-ping && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY client.cpp ./
+
+RUN g++ -std=c++17 -O2 -Wall client.cpp -o client
+
+CMD ["bash"]
